@@ -5,8 +5,7 @@
 ** util
 */
 
-#ifndef UTIL_H_
-    #define UTIL_H_
+#pragma once
 
     #include <SFML/Graphics.hpp>
     #include <SFML/System.hpp>
@@ -111,5 +110,3 @@ void create_new_sprite(sf::Sprite &sprite, sf::Texture &texture, sf::IntRect rec
 bool check_pos_mouse(sf::Vector2i &mouse, const sf::FloatRect &size, sf::RenderWindow &window);
 bool is_key_pressed(int key, sf::Event &event);
 void set_text_string(sf::Text &text, std::string &str, int position);
-
-#endif /* !UTIL_H_ */

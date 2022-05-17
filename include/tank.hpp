@@ -5,8 +5,7 @@
 ** tank
 */
 
-#ifndef TANK_HPP_
-    #define TANK_HPP_
+#pragma once
 
     #include <SFML/Graphics.hpp>
     #include <SFML/System.hpp>
@@ -35,6 +34,8 @@ typedef struct all {
     bool exit;
     all_fonts_t fonts;
     all_textures_t textures;
+
+    lobby_t lobby;
 } all_t;
 
 // *****************************************************************************
@@ -42,6 +43,7 @@ typedef struct all {
 // *****************************************************************************
 
 void create_game(all_t &var);
+void create_lobby(lobby_t &var);
 
 // *****************************************************************************
 // EVENT
@@ -55,5 +57,3 @@ void get_event(all_t &var);
 
 void do_lobby(all_t &var);
 void get_event_lobby(all_t &var);
-
-#endif /* !TANK_HPP_ */
