@@ -8,4 +8,5 @@ void create_game(all_t &var)
     var.exit = false;
     get_all_fonts(var.fonts);
     get_all_textures(var.textures);
+    create_lobby(var.lobby);
 }

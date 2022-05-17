@@ -5,8 +5,7 @@
 ** assets
 */
 
-#ifndef ASSETS_HPP_
-    #define ASSETS_HPP_
+#pragma once
 
     #include <SFML/Graphics.hpp>
     #include <SFML/System.hpp>
@@ -31,5 +30,3 @@ typedef struct all_textures {
 
 void get_all_fonts(all_fonts_t &fonts);
 void get_all_textures(all_textures_t &textures);
-
-#endif /* !ASSETS_HPP_ */
