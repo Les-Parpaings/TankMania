@@ -18,8 +18,16 @@
 
     #include "utils.hpp"
     #include "assets.hpp"
+    #include "game.hpp"
+    #include "lobby.hpp"
 
-typedef struct game {
+enum part {
+    PART_MENU_MAIN,
+    PART_LOBBY,
+    PART_GAME
+};
+
+typedef struct all {
     sf::RenderWindow window;
     sf::Event event;
     sf::Vector2i mouse_pos;
@@ -27,18 +35,25 @@ typedef struct game {
     bool exit;
     all_fonts_t fonts;
     all_textures_t textures;
-} game_t;
+} all_t;
 
 // *****************************************************************************
 // SETUP
 // *****************************************************************************
 
-void create_game(game_t &var);
+void create_game(all_t &var);
 
 // *****************************************************************************
 // EVENT
 // *****************************************************************************
 
-void get_event(game_t &var);
+void get_event(all_t &var);
+
+// *****************************************************************************
+// LOBBY
+// *****************************************************************************
+
+void do_lobby(all_t &var);
+void get_event_lobby(all_t &var);
 
 #endif /* !TANK_HPP_ */

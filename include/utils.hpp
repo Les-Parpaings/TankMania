@@ -21,7 +21,7 @@
     #define WINDOW_MAX_WIDTH        1920
     #define WINDOW_MAX_HEIGHT       1080
     #define WINDOW_SIZE             sf::VideoMode(1920, 1080)
-    #define WINDOW_NAME             "Pendu de l'Extreme"
+    #define WINDOW_NAME             "TankMania"
 
     #define POS_0               0.0f, 0.0f
     #define POS_MID             window.getSize().x / 2, window.getSize().y / 2
