@@ -1,0 +1,6 @@
+.vscode
+.backup_C
+*.o
+*.a
+*.out
+pendu
