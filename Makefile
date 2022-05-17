@@ -5,13 +5,16 @@
 ## Makefile
 ##
 
-BINARY	=	pendu
+BINARY	=	tankmania
 CC		=	g++ -g
 VALG	=	valgrind --leak-check=full --log-file=report.txt
 CSFML	=	-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window \
 			-lsfml-network
 
-DIR		=	src/utils
+DIR		=	src/utils \
+			src/game \
+			src/game/display \
+			src/game/setup \
 
 SRC		=	$(wildcard *.cpp $(foreach fd, $(DIR), $(fd)/*.cpp))
 OBJ		=	$(SRC:.cpp=.o)
@@ -58,7 +61,9 @@ fclean:	clean
 		@find -name "report.txt.core.*" -delete
 
 # Clean all and compile the project
-re:		fclean all
+re:
+		@$(MAKE) fclean -j --no-print
+		@$(MAKE) -j --no-print
 
 # Start the project
 compil:	re
