@@ -11,10 +11,14 @@ VALG	=	valgrind --leak-check=full --log-file=report.txt
 CSFML	=	-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window \
 			-lsfml-network
 
-DIR		=	src/utils \
+DIR		=	src/class \
+			src/display \
 			src/game \
-			src/game/display \
-			src/game/setup \
+			src/init \
+			src/lobby \
+			src/menu_main \
+			src/setup \
+			src/utils \
 
 SRC		=	$(wildcard *.cpp $(foreach fd, $(DIR), $(fd)/*.cpp))
 OBJ		=	$(SRC:.cpp=.o)
