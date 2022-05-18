@@ -29,15 +29,25 @@ enum part {
 };
 
 typedef struct all {
+    //windows
     sf::RenderWindow window;
     sf::Image icon;
     sf::Event event;
     sf::Vector2i mouse_pos;
+
+    //utils
     int part;
     bool exit;
     all_fonts_t fonts;
     all_textures_t textures;
 
+    //Client
+    sf::IpAddress ip;
+    sf::TcpSocket socket;
+    //Server
+    sf::TcpListener listener;
+
+    //parts
     menu_main_t menu_main;
     lobby_t lobby;
 } all_t;
