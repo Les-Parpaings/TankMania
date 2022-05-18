@@ -22,6 +22,7 @@ void get_menu_main_pressed(all_t &var)
 {
     if (check_pos_mouse(var.mouse_pos, var.menu_main.create.getGlobalBounds(), var.window)) {
         var.menu_main.create.setFillColor(sf::Color::Yellow);
+        var.part = PART_CREATE;
     }
     if (check_pos_mouse(var.mouse_pos, var.menu_main.join.getGlobalBounds(), var.window)) {
         var.menu_main.join.setFillColor(sf::Color::Yellow);
