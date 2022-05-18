@@ -12,7 +12,6 @@ CSFML	=	-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window \
 			-lsfml-network
 
 DIR		=	src/class \
-			src/display \
 			src/game \
 			src/init \
 			src/lobby \

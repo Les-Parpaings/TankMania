@@ -11,6 +11,9 @@ void get_event(all_t &var)
 
         var.mouse_pos = sf::Mouse::getPosition(var.window);
         switch (var.part) {
+            case PART_MENU_MAIN:
+                get_event_menu_main(var);
+                break;
             case PART_LOBBY:
                 get_event_lobby(var);
                 break;

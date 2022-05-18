@@ -14,6 +14,9 @@ int main(int ac, char **av)
             var.window.close();
 
         switch (var.part) {
+            case PART_MENU_MAIN:
+                do_menu_main(var);
+                break;
             case PART_LOBBY:
                 do_lobby(var);
                 break;
