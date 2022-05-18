@@ -1,23 +1,40 @@
 
 #include "tank.hpp"
 
-void get_event_lobby(all_t &var)
+void get_menu_main_selected(all_t &var)
 {
-    //Server
-    if (var.event.type == sf::Event::KeyPressed && var.event.key.code == sf::Keyboard::S) {
-        var.lobby.listener.listen(2000);
-        var.lobby.listener.accept(var.lobby.socket);
-        var.lobby.text = "Client connected";
-        std::cout << var.lobby.text << std::endl;
+    var.menu_main.create.setFillColor(sf::Color::White);
+    var.menu_main.join.setFillColor(sf::Color::White);
+    var.menu_main.quit.setFillColor(sf::Color::White);
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.create.getGlobalBounds(), var.window)) {
+        var.menu_main.create.setFillColor(TEXT_SELECTED_COLOR);
     }
-
-    //Client
-    if (var.event.type == sf::Event::KeyPressed && var.event.key.code == sf::Keyboard::C) {
-        var.lobby.socket.connect(var.lobby.ip, 2000);
-        var.lobby.text = "Connect to server";
-        std::cout << var.lobby.text << std::endl;
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.join.getGlobalBounds(), var.window)) {
+        var.menu_main.join.setFillColor(TEXT_SELECTED_COLOR);
     }
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.quit.getGlobalBounds(), var.window)) {
+        var.menu_main.quit.setFillColor(TEXT_SELECTED_COLOR);
+    }
+}
 
-    var.lobby.socket.send(var.lobby.text.c_str(), var.lobby.text.length() + 1);
-    var.lobby.socket.receive(var.lobby.buffer, sizeof(var.lobby.buffer), var.lobby.received);
+void get_menu_main_pressed(all_t &var)
+{
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.create.getGlobalBounds(), var.window)) {
+        var.menu_main.create.setFillColor(sf::Color::Yellow);
+    }
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.join.getGlobalBounds(), var.window)) {
+        var.menu_main.join.setFillColor(sf::Color::Yellow);
+    }
+    if (check_pos_mouse(var.mouse_pos, var.menu_main.quit.getGlobalBounds(), var.window)) {
+        var.exit = true;
+        var.menu_main.quit.setFillColor(sf::Color::Yellow);
+    }
+}
+
+void get_event_menu_main(all_t &var)
+{
+    get_menu_main_selected(var);
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        get_menu_main_pressed(var);
+    }
 }

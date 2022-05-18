@@ -16,16 +16,15 @@
     #include <iostream>
 
     #define IMAGE_ICON           "assets/image/icon.png"
-    #define IMAGE_BACKGROUND     "assets/image/background.png"
 
-    #define FONT_TITLE           "assets/font/titan_one.ttf"
+    #define FONT_HUD             "assets/font/titan_one.ttf"
 
 typedef struct all_fonts {
-    sf::Font title;
+    sf::Font hud;
 } all_fonts_t;
 
 typedef struct all_textures {
-    sf::Texture background;
+    // sf::Texture background;
 } all_textures_t;
 
 void get_all_fonts(all_fonts_t &fonts);
