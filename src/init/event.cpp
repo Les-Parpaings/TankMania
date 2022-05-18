@@ -14,7 +14,10 @@ void get_event(all_t &var)
             case PART_MENU_MAIN:
                 get_event_menu_main(var);
                 break;
-            case PART_LOBBY:
+            case PART_JOIN:
+                get_event_client(var);
+                break;
+            case PART_CREATE:
                 get_event_lobby(var);
                 break;
         }

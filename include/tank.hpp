@@ -24,30 +24,30 @@
 enum part {
     PART_MENU_MAIN,
     PART_JOIN,
-    PART_LOBBY,
+    PART_CREATE,
     PART_GAME
 };
 
 typedef struct all {
-    //windows
+    // windows
     sf::RenderWindow window;
     sf::Image icon;
     sf::Event event;
     sf::Vector2i mouse_pos;
 
-    //utils
+    // utils
     int part;
     bool exit;
     all_fonts_t fonts;
     all_textures_t textures;
 
-    //Client
+    // Client
     sf::IpAddress ip;
     sf::TcpSocket socket;
-    //Server
+    // Server
     sf::TcpListener listener;
 
-    //parts
+    // parts
     menu_main_t menu_main;
     lobby_t lobby;
 } all_t;
@@ -65,7 +65,17 @@ void get_event(all_t &var);
 
 void do_menu_main(all_t &var);
 void create_menu_main(menu_main_t &var, sf::RenderWindow &window, all_fonts_t &fonts, all_textures_t &textures);
+void display_menu_main(menu_main_t &var, sf::RenderWindow &window, int part);
 void get_event_menu_main(all_t &var);
+
+// *****************************************************************************
+// CLIENT
+// *****************************************************************************
+
+void do_client(all_t &var);
+void display_client(client_t &var, sf::RenderWindow &window);
+void get_event_client(all_t &var);
+void set_new_letter(all_t &var);
 
 // *****************************************************************************
 // LOBBY

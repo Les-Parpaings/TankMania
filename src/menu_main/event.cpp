@@ -20,14 +20,15 @@ void get_menu_main_selected(all_t &var)
 void get_menu_main_pressed(all_t &var)
 {
     if (check_pos_mouse(var.mouse_pos, var.menu_main.create.getGlobalBounds(), var.window)) {
-        var.menu_main.create.setFillColor(sf::Color::Yellow);
+        var.menu_main.create.setFillColor(sf::Color::White);
     }
     if (check_pos_mouse(var.mouse_pos, var.menu_main.join.getGlobalBounds(), var.window)) {
-        var.menu_main.join.setFillColor(sf::Color::Yellow);
+        var.part = PART_JOIN;
+        var.menu_main.join.setFillColor(sf::Color::White);
     }
     if (check_pos_mouse(var.mouse_pos, var.menu_main.quit.getGlobalBounds(), var.window)) {
         var.exit = true;
-        var.menu_main.quit.setFillColor(sf::Color::Yellow);
+        var.menu_main.quit.setFillColor(sf::Color::White);
     }
 }
 

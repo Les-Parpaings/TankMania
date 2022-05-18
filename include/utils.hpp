@@ -98,12 +98,12 @@
     #define SET_TEXT_MID            1
     #define SET_TEXT_RIGHT          2
 
-    #define WINDOW_MIDDLE           (sf::Vector2f){window.getSize().x / 2, \
-    window.getSize().y / 2}
-    #define WINDOW_MIDDLE_LEFT           (sf::Vector2f){window.getSize().x / 3, \
-    window.getSize().y / 2}
-    #define WINDOW_MIDDLE_RIGHT           (sf::Vector2f){window.getSize().x / 1.5, \
-    window.getSize().y / 2}
+    #define WINDOW_MIDDLE           (sf::Vector2f){window.getSize().x / 2.0f, \
+    window.getSize().y / 2.0f}
+    #define WINDOW_MIDDLE_LEFT           (sf::Vector2f){window.getSize().x / 3.0f, \
+    window.getSize().y / 2.0f}
+    #define WINDOW_MIDDLE_RIGHT           (sf::Vector2f){window.getSize().x / 1.5f, \
+    window.getSize().y / 2.0f}
 
 void create_new_text(sf::Text &text, sf::Font &font, std::string str, int size, sf::Color color, sf::Vector2f pos, float angle, sf::Vector2f scale);
 void create_new_sprite(sf::Sprite &sprite, sf::Texture &texture, sf::IntRect rect, sf::Vector2f pos, float angle, sf::Vector2f scale);
