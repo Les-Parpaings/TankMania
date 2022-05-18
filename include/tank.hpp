@@ -21,13 +21,15 @@
     #include "menu_main.hpp"
     #include "lobby.hpp"
 
+//Different scene of the game
 enum part {
     PART_MENU_MAIN,
     PART_JOIN,
-    PART_LOBBY,
+    PART_CREATE,
     PART_GAME
 };
 
+//Data for all the game
 typedef struct all {
     //windows
     sf::RenderWindow window;
@@ -41,15 +43,12 @@ typedef struct all {
     all_fonts_t fonts;
     all_textures_t textures;
 
-    //Client
-    sf::IpAddress ip;
-    sf::TcpSocket socket;
-    //Server
-    sf::TcpListener listener;
-
     //parts
     menu_main_t menu_main;
     lobby_t lobby;
+
+    //network
+    network_t network;
 } all_t;
 
 // *****************************************************************************
@@ -74,3 +73,4 @@ void get_event_menu_main(all_t &var);
 void do_lobby(all_t &var);
 void create_lobby(lobby_t &var, sf::RenderWindow &window, all_fonts_t &fonts, all_textures_t &textures);
 void get_event_lobby(all_t &var);
+void server(all_t &var);

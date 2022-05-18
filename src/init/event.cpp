@@ -1,6 +1,7 @@
 
 #include "tank.hpp"
 
+//Get all event in the game
 void get_event(all_t &var)
 {
     while (var.window.pollEvent(var.event)) {
@@ -14,7 +15,7 @@ void get_event(all_t &var)
             case PART_MENU_MAIN:
                 get_event_menu_main(var);
                 break;
-            case PART_LOBBY:
+            case PART_CREATE:
                 get_event_lobby(var);
                 break;
         }

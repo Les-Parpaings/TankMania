@@ -3,6 +3,7 @@
 
 using namespace sf;
 
+//Use to create a sfml text
 void create_new_text(sf::Text &text, sf::Font &font, std::string str, int size, sf::Color color, sf::Vector2f pos, float angle, sf::Vector2f scale)
 {
     text.setFont(font);
@@ -16,6 +17,7 @@ void create_new_text(sf::Text &text, sf::Font &font, std::string str, int size, 
     text.setOutlineThickness(3.0f);
 }
 
+//Use to create sfml sprite
 void create_new_sprite(sf::Sprite &sprite, sf::Texture &texture, sf::IntRect rect, sf::Vector2f pos, float angle, sf::Vector2f scale)
 {
     sprite.setTexture(texture);

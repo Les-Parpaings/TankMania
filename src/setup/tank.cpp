@@ -1,6 +1,7 @@
 
 #include "tank.hpp"
 
+//Load all data use in the game
 void create_game(all_t &var)
 {
     //window

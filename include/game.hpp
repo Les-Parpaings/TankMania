@@ -36,6 +36,7 @@ class PlayersList {
 // STRUCTURE
 // *****************************************************************************
 
+//Data use in the main game scene
 typedef struct game
 {
 

@@ -17,7 +17,7 @@ int main(int ac, char **av)
             case PART_MENU_MAIN:
                 do_menu_main(var);
                 break;
-            case PART_LOBBY:
+            case PART_CREATE:
                 do_lobby(var);
                 break;
         }

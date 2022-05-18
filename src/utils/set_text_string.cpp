@@ -7,6 +7,7 @@
 
 #include "utils.hpp"
 
+//Set a string to an sfml text
 void set_text_string(sf::Text &text, std::string &str, int position)
 {
     text.setString(str);

@@ -1,6 +1,7 @@
 
 #include "tank.hpp"
 
+//Check mouse position and if it is over a text
 void get_menu_main_selected(all_t &var)
 {
     var.menu_main.create.setFillColor(sf::Color::White);
