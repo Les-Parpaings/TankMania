@@ -1,47 +1,25 @@
-/*
-** EPITECH PROJECT, 2022
-** le_jeu_de_tank_trop_rigolo
-** File description:
-** game
-*/
 
 #pragma once
 
-    #include "utils.hpp"
-    #include "assets.hpp"
+    #include "maze.hpp"
 
-// *****************************************************************************
-// CLASS
-// *****************************************************************************
+namespace Tank {
 
-/* typedef struct player {
-    sf::Text text;
-    sf::Sprite sprite;
-    bool is_choosen;
-    struct node *next;
-} player_t;
-
-class PlayersList {
+class Player {
     public:
-        List(void);
-        ~List();
+        Player();
+        void create(utils::Utils &utils);
+        void draw(sf::RenderWindow &window);
+        void getEvent(utils::Utils &utils);
+        ~Player();
 
     private:
-        node_t *node;
-        int len;
-        node_t *create_node(std::string letter, int index, font_list_t &fonts);
-}; */
+        sf::Sprite sprite;
+};
 
-// *****************************************************************************
-// STRUCTURE
-// *****************************************************************************
+struct Game {
+    Maze maze;
+    std::list<Player> players;
+};
 
-//Data use in the main game scene
-typedef struct game
-{
-
-} game_t;
-
-// *****************************************************************************
-// PROTOTYPES
-// *****************************************************************************
+}

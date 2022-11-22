@@ -1,77 +1,77 @@
 ##
-## EPITECH PROJECT, 2021
+## MAZE PROJECT, 2022
 ## Makefile
 ## File description:
 ## Makefile
 ##
 
-BINARY	=	tankmania
-CC		=	g++ -g
-VALG	=	valgrind --leak-check=full --log-file=report.txt
-CSFML	=	-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window \
-			-lsfml-network
+# Compilation Settings
+BIN		:=		TankMania
+CC		:=		g++ -g -std=c++17
+VALG	:=		valgrind --leak-check=full --log-file=report.txt
+SFML	:=		-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window
 
-DIR		=	src/class \
-			src/game \
-			src/init \
-			src/lobby \
-			src/menu_main \
-			src/setup \
-			src/utils \
+# Command Settings
+rwildcard	=		$(foreach d, $(wildcard $(1:=/*)), $(call rwildcard, $d, $2) $(filter $(subst *, %, $2), $d))
+RM			=		@rm --force
+FIND		=		@find -name "*.o" -exec printf
 
-SRC		=	$(wildcard *.cpp $(foreach fd, $(DIR), $(fd)/*.cpp))
-OBJ		=	$(SRC:.cpp=.o)
+# File Settings
+DIR		:=		src
+EXT		:=		cpp
+SRC		:=		$(call rwildcard, $(DIR), *.$(EXT))
+OBJ		:=		$(SRC:.$(EXT)=.o)
 
-HEAD	=	./include/
+# Dependencies Settings
+LIB		:=		./lib/
+INCLUDE	:=		./include/
 
-RED		=	\033[1;31m
-GREEN	=	\033[1;32m
-BLUE	=	\033[1;34m
-CYAN	=	\033[1;36m
-NC		=	\033[0m
+# Display Settings
+RED		:=	\033[1;31m
+GREEN	:=	\033[1;32m
+YELLOW	:=	\033[1;33m
+BLUE	:=	\033[1;34m
+CYAN	:=	\033[1;36m
+NC		:=	\033[0m
+TEXT	:=	$(GREEN)➜$(NC)  $(CYAN)Root$(NC)
+INTRO	:=	$(YELLOW)================================================================$(NC)\n
 
-TEXT	=	$(GREEN)➜$(NC)  $(CYAN)Root$(NC)
-FIND	=	@find -name "*.o" -exec printf
+.PHONY: all clean fclean re compil valgrind
 
-RM		=	rm --force
+all:	$(BIN)
 
-.PHONY: all clean fclean re
+#Compiled all .c file not compiled in .o
+$(OBJ):	%.o: %.$(EXT)
+		@$(CC) -I$(INCLUDE) -c -o $@ $<
+		@printf "$(TEXT)$(BLUE) file $(RED)./$@$(BLUE) created$(NC)\n"
 
-all:	$(BINARY)
+#Compiled project with lib and all .o files
+$(BIN):	$(OBJ)
+		@$(CC) -o $@ $^ -I$(INCLUDE) $(SFML)
+		@printf "\n$(INTRO)$(YELLOW) · Compilation Succesfully Finished$(NC)\n$(INTRO)\n"
 
-# Compiled all .cpp file not compiled in .o
-$(OBJ): %.o: %.cpp
-		@$(CC) -I$(HEAD) -c -o $@ $<
-		@printf "$(TEXT)$(BLUE) file $(RED)$@$(BLUE) created$(NC)\n"
-
-# Compiled project with lib and all .o files
-$(BINARY):	$(OBJ)
-		@$(CC) -o $@ $^ -I$(HEAD) $(CSFML)
-		@printf "$(TEXT)$(BLUE) Compilation done$(NC)\n"
-
-# Removes all .o files
+#Removes all .o files
 clean:
+#		$(call INTRO_DISPLAY, ${INTRO_CLEAN})
 		@$(FIND) "$(TEXT)$(BLUE) file $(RED){}$(BLUE) removed$(NC)\n" \;
 		@$(RM) $(OBJ)
 
-# Removes all useless files, binary and library
+#Removes all useless files, binary and library
 fclean:	clean
-		@printf "$(TEXT)$(BLUE) binary $(RED)$(BINARY)$(BLUE) removed$(NC)\n"
-		@$(RM) $(BINARY)
-		@printf "$(TEXT)$(BLUE) valgrind reports removed$(NC)\n"
-		@find -name "vgcore.*" -delete
+#		$(call INTRO_DISPLAY, ${INTRO_FCLEAN})
+		@find -name "prgm" -exec printf "$(TEXT)$(BLUE) binary $(RED)$(BIN)$(BLUE) removed$(NC)\n" \;
+		@$(RM) $(BIN)
 		@$(RM) report.txt
+		@find -name "vgcore.*" -delete
 		@find -name "report.txt.core.*" -delete
 
-# Clean all and compile the project
-re:
-		@$(MAKE) fclean -j --no-print
-		@$(MAKE) -j --no-print
+#Clean all and compile the project
+re:	fclean all
 
-# Start the project
+#Recompile and Start the project
 compil:	re
-		@./$(BINARY)
+	@./$(BIN)
 
-# Start the project with valgrind in a report file
+#Start the project with valgrind in a report file
 valgrind:
-		@$(VALG) ./$(BINARY)
+	@$(VALG) ./$(BIN)

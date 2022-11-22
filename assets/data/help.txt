@@ -1,0 +1,11 @@
+USAGE:
+    ./BSQ [args]
+
+ARGUMENTS:
+    --help      -h      display this message
+    --file      -f      do the algorithm to the file
+    --directory -d      do the algorithm to all the file of the folder
+    --create    -c      do the algorithm to a custom pattern
+
+DESCRIPTION:
+    find the biggest square in a map lol.
