@@ -20,6 +20,8 @@ Textures::Textures()
             name = entry.path().string();
             len = name.length() - strlen(DIR_IMAGE);
             name.erase(name.begin(), name.end() - len);
+            if (name == ".gitkeep")
+                continue;
             name.erase(name.end() - strlen(EXT_IMAGE), name.end());
             path = std::string(DIR_IMAGE + name + EXT_IMAGE);
 

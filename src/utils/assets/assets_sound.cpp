@@ -21,6 +21,8 @@ Sounds::Sounds()
             name = entry.path().string();
             len = name.length() - strlen(DIR_SOUND);
             name.erase(name.begin(), name.end() - len);
+            if (name == ".gitkeep")
+                continue;
             name.erase(name.end() - strlen(EXT_SOUND), name.end());
             path = std::string(DIR_SOUND + name + EXT_SOUND);
 

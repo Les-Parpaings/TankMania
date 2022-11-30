@@ -1,6 +1,14 @@
 
 #pragma once
 
+    // #if defined(_WIN32)
+    //     // For Visual C++ compilers
+    //     // Disable warning int = size_t
+    //     #if defined(_MSC_VER)
+    //         #pragma warning(disable: 4267)
+    //     #endif
+    // #endif
+
     #include <SFML/Graphics.hpp>
     #include <SFML/System.hpp>
     #include <SFML/Audio.hpp>
@@ -178,6 +186,7 @@ class Utils
         Textures textures;
         Fonts fonts;
         Sounds sounds;
+        Shaders shaders;
 
         Utils();
 

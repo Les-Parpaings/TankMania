@@ -46,4 +46,13 @@ void Maze::draw(sf::RenderWindow &window)
     }
 }
 
+//-----------------------------------------------
+//  GET INFO
+//-----------------------------------------------
+
+Walls &Maze::getGraphics()
+{
+    return walls;
+}
+
 }

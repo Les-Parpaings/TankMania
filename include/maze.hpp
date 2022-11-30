@@ -66,6 +66,7 @@ class Maze {
         void generateNewMaze(int x, int y);
         void reset();
         void draw(sf::RenderWindow &window);
+        std::list<sf::VertexArray> &getGraphics();
         ~Maze();
 
     private:

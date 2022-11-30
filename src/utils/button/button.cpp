@@ -30,12 +30,19 @@ Button::~Button()
     }
 }
 
-void Button::draw(sf::RenderWindow &window)
+void Button::draw(sf::RenderWindow &window, const sf::RenderStates &states)
 {
+    sf::RenderStates renderStates;
+    if (hover) {
+        renderStates = states;
+    } else {
+        renderStates = sf::RenderStates::Default;
+    }
+
     if (IS_DEFINED(sprite))
-        window.draw((*sprite));
+        window.draw((*sprite), renderStates);
     if (IS_DEFINED(text))
-        window.draw((*text));
+        window.draw((*text), renderStates);
 }
 
 // ****************************************************************************

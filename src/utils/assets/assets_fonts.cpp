@@ -20,6 +20,8 @@ Fonts::Fonts()
             name = entry.path().string();
             len = name.length() - strlen(DIR_FONT);
             name.erase(name.begin(), name.end() - len);
+            if (name == ".gitkeep")
+                continue;
             name.erase(name.end() - strlen(EXT_FONT), name.end());
             path = std::string(DIR_FONT + name + EXT_FONT);
 

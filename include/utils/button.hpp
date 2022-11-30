@@ -30,7 +30,7 @@ class Button
     public:
         Button();
 
-        virtual void draw(sf::RenderWindow &window);
+        virtual void draw(sf::RenderWindow &window, const sf::RenderStates &states = sf::RenderStates::Default);
 
         /// \brief Get if the mouse is touching the button and if the left button is pressed
         /// \param window the window used
@@ -111,7 +111,7 @@ class ButtonIcon : public ButtonClick
         ButtonIcon();
 
         void create(sf::Texture &t_button, sf::IntRect r_button, ButtonRect info_button, sf::Texture &t_icon, sf::IntRect r_icon, sf::Font &font, sf::String str, int size, sf::Vector2f pos, animState anim_state, bool os);
-        virtual void draw(sf::RenderWindow &window);
+        virtual void draw(sf::RenderWindow &window, const sf::RenderStates &states = sf::RenderStates::Default);
 
         virtual void doAnimation();
 

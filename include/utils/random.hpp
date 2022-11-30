@@ -22,4 +22,4 @@ template <typename T> T getRandom(T max);
 /// \return number generated
 template <typename T> T getRandomInRange(T min, T max);
 
-}
+}; // namespace utils

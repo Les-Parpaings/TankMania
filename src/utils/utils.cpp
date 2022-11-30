@@ -42,7 +42,9 @@ void Utils::draw()
     transition_circle.doTransition();
     transition_circle.draw(window);
 
-     if (HAS_CURSOR) {
+    shaders.setParameter();
+
+    if (HAS_CURSOR) {
         cursor.setCursorPosition(window);
         cursor.draw(window);
     }

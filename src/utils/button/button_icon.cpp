@@ -32,11 +32,18 @@ void ButtonIcon::create(sf::Texture &t_button, sf::IntRect r_button, ButtonRect 
     this->one_shot = os;
 }
 
-void ButtonIcon::draw(sf::RenderWindow &window)
+void ButtonIcon::draw(sf::RenderWindow &window, const sf::RenderStates &states)
 {
-    window.draw(*sprite);
-    window.draw(icon);
-    window.draw(*text);
+    sf::RenderStates renderStates;
+    if (hover) {
+        renderStates = states;
+    } else {
+        renderStates = sf::RenderStates::Default;
+    }
+
+    window.draw(*sprite, renderStates);
+    window.draw(icon, renderStates);
+    window.draw(*text, renderStates);
 }
 
 void ButtonIcon::getEventClick()

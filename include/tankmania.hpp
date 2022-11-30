@@ -16,10 +16,14 @@
 
 namespace Tank {
 
+    #define COLLISION_TEST  0
+
 enum allPart {
     PART_MENU,
     PART_GAME
 };
+
+using Walls = std::list<sf::VertexArray>;
 
 struct TankMania {
     int part;
