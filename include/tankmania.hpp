@@ -1,44 +1,37 @@
 
 #pragma once
 
-    #include <SFML/Graphics.hpp>
-    #include <SFML/System.hpp>
-    #include <SFML/Audio.hpp>
-    #include <SFML/Window.hpp>
-    // #include <SFML/Network.hpp>
-
-    #include <iostream>
-    #include <vector>
-    #include <list>
-
     #include "utils/utils.hpp"
-    #include "game.hpp"
+    #include "game/main.hpp"
 
 namespace Tank {
 
-    #define COLLISION_TEST  0
-
-enum allPart {
-    PART_MENU,
-    PART_GAME
-};
-
-using Walls = std::list<sf::VertexArray>;
-
-struct TankMania {
-    int part;
-
-    Game game;
-};
-
-int main_tankmania(utils::Utils &utils);
-
-void create_all(TankMania &var, utils::Utils &utils);
-void destroy_all(TankMania &var, utils::Utils &utils);
-void draw(TankMania &var, utils::Utils &utils);
-void get_event_all(TankMania &var, utils::Utils &utils);
-
-void do_game(TankMania &var, utils::Utils &utils);
-void get_event_game(Game &var, utils::Utils &utils);
+int main_game(utils::Utils &utils, Settings &settings);
 
 }
+
+/*
+
+    Starting Menu
+        List of Player
+            Name
+            Control
+        Play
+        Settings
+        Quit
+
+    Settings
+        Sound
+        Music
+
+    Game
+        Background
+        Maze
+            Player
+            Powerups
+        HUD
+            Icon (Powerup)
+            Name
+            Kills
+            Victory
+*/

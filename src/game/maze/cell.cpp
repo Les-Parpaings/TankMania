@@ -1,5 +1,5 @@
 
-#include "tankmania.hpp"
+#include "game/main.hpp"
 
 using namespace utils;
 namespace Tank {

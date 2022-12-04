@@ -1,13 +1,18 @@
 
-#include "tankmania.hpp"
+#include "game/main.hpp"
 
 using namespace utils;
 namespace Tank {
 
-void get_event_game(Game &var, Utils &utils)
+void Game::getEvent(Utils &utils)
 {
-    if (utils.event.type == sf::Event::KeyPressed && utils.event.key.code == sf::Keyboard::Space)
-        var.maze.generateNewMaze(WALL_WIDTH, WALL_HEIGHT);
+    while (utils.window.pollEvent(utils.event)) {
+        // Exit
+        utils.getExitEvent();
+        if (utils.event.type == sf::Event::KeyPressed && utils.event.key.code == sf::Keyboard::Escape) {
+            utils.window.close();
+        }
+    }
 }
 
 }

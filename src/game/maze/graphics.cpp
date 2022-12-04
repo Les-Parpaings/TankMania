@@ -1,5 +1,5 @@
 
-#include "tankmania.hpp"
+#include "game/main.hpp"
 
 using namespace utils;
 namespace Tank {
@@ -8,29 +8,35 @@ namespace Tank {
 //  CREATION
 //-----------------------------------------------
 
-sf::VertexArray createWall(int x, int y, int width, int height)
+sf::VertexArray createVertices(int x, int y, int width, int height, sf::Color color)
 {
     sf::VertexArray vertices(sf::Quads, 4);
 
-    vertices[0].position = sf::Vector2f(x        , y);
-    vertices[1].position = sf::Vector2f(x + width, y);
-    vertices[2].position = sf::Vector2f(x + width, y + height);
-    vertices[3].position = sf::Vector2f(x        , y + height);
+    for (size_t i = 0; i < vertices.getVertexCount(); i++) {
+        vertices[i].color = color;
+        vertices[i].position = sf::Vector2f(x, y);
+        if (i == 1 || i == 2)
+            vertices[i].position.x += width;
+        if (i >= 2)
+            vertices[i].position.y += height;
+    }
 
     return vertices;
 }
 
 void Maze::generateGraphics()
 {
+    floor = createVertices(WALL_X, WALL_Y, width * WALL_LENGHT, height * WALL_LENGHT, sf::Color(196, 196, 196));
+
     for (int i = 0; i < horizontal.size(); i++) {
         if (horizontal[i]) {
-            walls.push_back(createWall(WALL_X + ((i % width) * WALL_LENGHT), WALL_Y + ((i / width) * WALL_LENGHT), WALL_LENGHT + WALL_THICKNESS, WALL_THICKNESS));
+            walls.push_back(createVertices(WALL_X + ((i % width) * WALL_LENGHT), WALL_Y + ((i / width) * WALL_LENGHT), WALL_LENGHT + WALL_THICKNESS, WALL_THICKNESS, sf::Color::Black));
         }
     }
 
     for (int i = 0; i < vertical.size(); i++) {
         if (vertical[i]) {
-            walls.push_back(createWall(WALL_X + ((i % (width + 1)) * WALL_LENGHT), WALL_Y + ((i / (width + 1)) * WALL_LENGHT), WALL_THICKNESS, WALL_LENGHT + WALL_THICKNESS));
+            walls.push_back(createVertices(WALL_X + ((i % (width + 1)) * WALL_LENGHT), WALL_Y + ((i / (width + 1)) * WALL_LENGHT), WALL_THICKNESS, WALL_LENGHT + WALL_THICKNESS, sf::Color::Black));
         }
     }
 }
@@ -41,6 +47,7 @@ void Maze::generateGraphics()
 
 void Maze::draw(sf::RenderWindow &window)
 {
+    window.draw(floor);
     for (auto &it : walls) {
         window.draw(it);
     }
@@ -50,7 +57,7 @@ void Maze::draw(sf::RenderWindow &window)
 //  GET INFO
 //-----------------------------------------------
 
-Walls &Maze::getGraphics()
+Walls &Maze::getWalls()
 {
     return walls;
 }

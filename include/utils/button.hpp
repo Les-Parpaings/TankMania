@@ -23,9 +23,9 @@ typedef struct ButtonColor {
     #define NO_SPRITE       false, TEXTURE_NONE, sf::IntRect(), ButtonRect{0, 0, 0}
     #define NO_TEXT         false, FONT_NONE, "", 0, BUTTON_COLOR_DEFAULT
 
-
-/// \brief Default class for button without graphics
-class Button
+/// \brief Default class for button without graphics.
+/// \deprecated This class is deprecated because it don't hold the creation of the sprite and the text
+class SFML_DEPRECATED Button
 {
     public:
         Button();

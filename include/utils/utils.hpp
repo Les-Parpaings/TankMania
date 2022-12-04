@@ -190,7 +190,7 @@ class Utils
 
         Utils();
 
-        /// \brief Draw cursor and display everythings that has been drawn berfore
+        /// \brief Display everythings that has been drawn berfore
         void draw();
         /// \brief Draw a black screen with the save text
         void drawSave(sf::Text &text);
@@ -207,7 +207,6 @@ class Utils
     private:
         sf::Image icon;
         sf::ContextSettings settings;
-        Cursor cursor;
 
         bool exit;
 };
@@ -235,5 +234,8 @@ bool isMouseInView(sf::RenderWindow &window, sf::View &view);
 
 template <typename T>
 void printVector(const T pos);
+template <typename T>
+void printRect(const T rect);
+void printJoystick(int index);
 
 }; // namespace utils

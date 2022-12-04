@@ -66,7 +66,8 @@ class Maze {
         void generateNewMaze(int x, int y);
         void reset();
         void draw(sf::RenderWindow &window);
-        std::list<sf::VertexArray> &getGraphics();
+        std::list<sf::VertexArray> &getWalls();
+        sf::Vector2f getSize();
         ~Maze();
 
     private:
@@ -77,6 +78,7 @@ class Maze {
         std::vector<int> vertical;
         CellList cells;
 
+        sf::VertexArray floor;
         std::list<sf::VertexArray> walls;
 
         void generateNewRandom();

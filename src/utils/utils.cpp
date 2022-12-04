@@ -11,15 +11,11 @@ Utils::Utils()
 {
     //Window
     settings.antialiasingLevel = 8;
-    window.create(WINDOW_SIZE, WINDOW_NAME, sf::Style::Fullscreen, settings);
+    window.create(WINDOW_SIZE, WINDOW_NAME, sf::Style::Default, settings);
     icon.loadFromFile(PATH_ICON);
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     window.setFramerateLimit(WINDOW_FPS);
     exit = false;
-
-    //Cursor
-    if (HAS_CURSOR)
-        window.setMouseCursorVisible(false);
 
     //Time
     std::srand((unsigned int)(std::time(nullptr)));
@@ -43,11 +39,6 @@ void Utils::draw()
     transition_circle.draw(window);
 
     shaders.setParameter();
-
-    if (HAS_CURSOR) {
-        cursor.setCursorPosition(window);
-        cursor.draw(window);
-    }
 
     window.display();
 }

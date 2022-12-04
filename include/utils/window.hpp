@@ -4,11 +4,10 @@
 namespace utils {
 
     #define WINDOW_SIZE             sf::VideoMode(1920, 1080)
-    #define WINDOW_NAME             sf::String("SFML Window")
+    #define WINDOW_NAME             sf::String("TankMania")
     #define WINDOW_FPS              60
 
     #define PATH_ICON               "assets/icon.png"
-    #define PATH_CURSOR             "assets/cursor.png"
 
     #define HAS_CURSOR              true
 

@@ -1,5 +1,5 @@
 
-#include "tankmania.hpp"
+#include "game/main.hpp"
 #include <algorithm>
 
 using namespace utils;
@@ -35,6 +35,11 @@ void Maze::reset()
     this->random.clear();
 
     this->walls.clear();
+}
+
+sf::Vector2f Maze::getSize()
+{
+    return sf::Vector2f(width, height);
 }
 
 //-----------------------------------------------

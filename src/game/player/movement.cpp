@@ -1,39 +1,14 @@
 
-#include "tankmania.hpp"
+#include "game/main.hpp"
 #include <cmath>
 
 using namespace utils;
 namespace Tank {
 
-float calculMove(float angle)
+void movePlayer(sf::Sprite &sprite, directions index, bool reverse, float velocity)
 {
-    float value = angle;
-    bool reverse = false;
-
-    // Y case, if it exceed 360°
-    if (value >= 360.0f)
-        value -= 360.0f;
-
-    // If angle is in the negative part
-    if (value > 180.0f) {
-        value -= 180.0f;
-        reverse = true;
-    }
-
-    if (value > 90.0f)
-        value = 180.0f - value;
-    value /= 18;
-
-    if (reverse)
-        value = -value;
-
-    return value;
-}
-
-void movePlayer(sf::Sprite &sprite, directions index, bool reverse)
-{
-    float x = calculMove(sprite.getRotation());
-    float y = calculMove(sprite.getRotation() + 270.0f);
+    float x = calculMove(sprite.getRotation(), 5.0f * velocity);
+    float y = calculMove(sprite.getRotation() + 270.0f, 5.0f * velocity);
 
     if (reverse) {
         x = -x;
@@ -49,26 +24,23 @@ void movePlayer(sf::Sprite &sprite, directions index, bool reverse)
 
 void Player::checkOneMovement(Walls &walls, directions index)
 {
-    movePlayer(sprite, index, false);
-    #if COLLISION_TEST == 0
+    if (speed < 1.0f)
+        speed += 0.1f;
+    movePlayer(sprite, index, false, speed);
     for (auto &wall : walls) {
-        if (isColliding(wall)) {
-            movePlayer(sprite, index, true);
+        if (isColliding(sprite, wall)) {
+            movePlayer(sprite, index, true, speed);
+            speed = 0.0f;
             return;
         }
     }
-    #else
-    if (isColliding(test)) {
-        movePlayer(sprite, index, true);
-    }
-    #endif
 }
 
 void Player::checkOneRotation(Walls &walls, float angle)
 {
     sprite.rotate(angle);
     for (auto &wall : walls) {
-        if (isColliding(wall)) {
+        if (isColliding(sprite, wall)) {
             sprite.rotate(-angle);
             return;
         }
@@ -77,21 +49,19 @@ void Player::checkOneRotation(Walls &walls, float angle)
 
 void Player::doMovement(Walls &walls)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+    if (moveForward(index)) {
         checkOneMovement(walls, UP);
-        line.setPosition(sprite.getPosition());
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    } else if (moveBackward(index)) {
         checkOneMovement(walls, DOWN);
-        line.setPosition(sprite.getPosition());
+    } else {
+        speed = 0.0f;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        checkOneRotation(walls, -5.0f);
-        line.setRotation(sprite.getRotation());
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+
+    if (rotateForward(index)) {
         checkOneRotation(walls, 5.0f);
-        line.setRotation(sprite.getRotation());
+    }
+    if (rotateBackward(index)) {
+        checkOneRotation(walls, -5.0f);
     }
 }
 
