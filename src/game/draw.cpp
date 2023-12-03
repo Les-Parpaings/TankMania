@@ -6,7 +6,7 @@ namespace Tank {
 
 void Game::draw(Utils &utils)
 {
-    utils.clear(sf::Color::White);
+    utils.clear(sf::Color(16, 16, 16));
 
     maze.draw(utils.window);
     for (auto &it : powerups)

@@ -28,13 +28,13 @@ void Maze::generateGraphics()
 {
     floor = createVertices(WALL_X, WALL_Y, width * WALL_LENGHT, height * WALL_LENGHT, sf::Color(196, 196, 196));
 
-    for (int i = 0; i < horizontal.size(); i++) {
+    for (size_t i = 0; i < horizontal.size(); i++) {
         if (horizontal[i]) {
             walls.push_back(createVertices(WALL_X + ((i % width) * WALL_LENGHT), WALL_Y + ((i / width) * WALL_LENGHT), WALL_LENGHT + WALL_THICKNESS, WALL_THICKNESS, sf::Color::Black));
         }
     }
 
-    for (int i = 0; i < vertical.size(); i++) {
+    for (size_t i = 0; i < vertical.size(); i++) {
         if (vertical[i]) {
             walls.push_back(createVertices(WALL_X + ((i % (width + 1)) * WALL_LENGHT), WALL_Y + ((i / (width + 1)) * WALL_LENGHT), WALL_THICKNESS, WALL_LENGHT + WALL_THICKNESS, sf::Color::Black));
         }

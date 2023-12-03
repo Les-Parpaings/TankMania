@@ -9,20 +9,19 @@ HUD::HUD()
 {
 }
 
-HUD::HUD(Utils &utils, sf::Vector2f pos, sf::String str)
+HUD::HUD(Utils &utils, sf::Vector2f pos, sf::Color color)
 {
-    newSprite(background, TEXTURE_NONE, sf::IntRect(0, 0, 300, 150), pos, VECTOR_1, sf::Color(64, 64, 64));
+    newSprite(background, I_HUD_BG, R_HUD_BG, pos, VECTOR_1);
 
-    newSprite(icon, TEXTURE_NONE, sf::IntRect(0, 0, 50, 50), pos + sf::Vector2f(-110.0f, 35.0f), VECTOR_1, sf::Color::Blue);
-    newText(name, FONT_UBUNTU_BOLD, str, 35, pos - sf::Vector2f(135.0f, 40.0f), 2.0f);
-    name.setOrigin(0.0f, name.getOrigin().y);
+    newSprite(icon, TEXTURE_NONE, R_POWERUPS, pos + sf::Vector2f(100.0f, -30.0f), sf::Vector2f(0.15f, 0.15f));
+    newSprite(player, I_PLAYER, R_PLAYER, pos - sf::Vector2f(85.0f, 30.0f), VECTOR_1, color, 90.0f);
 
-    newSprite(kill_icon, I_ICON_KILL, R_ICON, pos + sf::Vector2f(-45.0f, 35.0f), VECTOR_0_33);
-    newText(kill_text, FONT_UBUNTU_REGULAR, "0", 25, kill_icon.getPosition() + sf::Vector2f(20.0f, 0.0f), 1.0f, sf::Color::White);
+    newSprite(kill_icon, I_HUD_KILL, R_HUD_ICON, pos + sf::Vector2f(-100.0f, 30.0f), VECTOR_0_25);
+    newText(kill_text, FONT_UBUNTU_REGULAR, "0", 25, kill_icon.getPosition() + sf::Vector2f(40.0f, 0.0f), 1.0f);
     kill_text.setOrigin(0.0f, kill_text.getOrigin().y);
 
-    newSprite(victory_icon, I_ICON_VICTORY, R_ICON, kill_icon.getPosition() + sf::Vector2f(100.0f, 0.0f), VECTOR_0_33);
-    newText(victory_text, FONT_UBUNTU_REGULAR, "0", 25, victory_icon.getPosition() + sf::Vector2f(20.0f, 0.0f), 1.0f, sf::Color::White);
+    newSprite(victory_icon, I_HUD_VICTORY, R_HUD_ICON, kill_icon.getPosition() + sf::Vector2f(150.0f, 0.0f), VECTOR_0_25);
+    newText(victory_text, FONT_UBUNTU_REGULAR, "0", 25, victory_icon.getPosition() + sf::Vector2f(40.0f, 0.0f), 1.0f);
     victory_text.setOrigin(0.0f, victory_text.getOrigin().y);
 }
 
@@ -36,7 +35,7 @@ void HUD::draw(sf::RenderWindow &window, int powerup)
 
     if (powerup != NO_POWERUP)
         window.draw(icon);
-    window.draw(name);
+    window.draw(player);
 
     window.draw(kill_icon);
     window.draw(kill_text);

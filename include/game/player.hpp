@@ -11,8 +11,9 @@ class HUD
 {
     public:
         HUD();
-        HUD(utils::Utils &utils, sf::Vector2f pos, sf::String name);
+        HUD(utils::Utils &utils, sf::Vector2f pos, sf::Color color);
         void draw(sf::RenderWindow &window, int powerup);
+        void setPowerup(const sf::Texture *texture);
         void setTextKill(int score);
         void setTextVictory(int score);
         void setAlive();
@@ -23,7 +24,7 @@ class HUD
         sf::Sprite background;
 
         sf::Sprite icon;
-        sf::Text name;
+        sf::Sprite player;
 
         sf::Sprite kill_icon;
         sf::Text kill_text;

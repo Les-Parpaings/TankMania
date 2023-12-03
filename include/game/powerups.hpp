@@ -4,14 +4,14 @@
 namespace Tank {
 
 enum PowerupsList {
-    NO_POWERUP,
+    NO_POWERUP = -1,
     BIG,
     SHOTGUN,
     MINIGUN,
     BOMBE,
-    LASER,
     CAMO,
-    BOMBE_EXPLOSION
+    BOMBE_EXPLOSION,
+    POWERUP_SIZE
 };
 
 class Powerup {

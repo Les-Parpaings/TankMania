@@ -15,6 +15,12 @@ void Player::restart(int x, int y)
     sprite.setRotation(Random::getRandom(4) * 90);
     alive = true;
     hud.setAlive();
+
+    if (powerup == PowerupsList::CAMO) {
+        auto color = this->sprite.getColor();
+        color.a = 255;
+        this->sprite.setColor(color);
+    }
     powerup = NO_POWERUP;
 }
 

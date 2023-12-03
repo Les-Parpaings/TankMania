@@ -6,9 +6,17 @@ namespace Tank {
 
 Powerup::Powerup(Utils &utils, sf::Vector2f pos)
 {
-    newSprite(sprite, TEXTURE_NONE, sf::IntRect(0, 0, 50, 50), pos, VECTOR_0, sf::Color::Blue);
-    // type = Random::getRandomInRange(1, 6);
-    type = PowerupsList::CAMO;
+    int limit = PowerupsList::POWERUP_SIZE - 1;
+    type = Random::getRandom(limit);
+
+    std::string powerupPallet[limit] = {
+        "powerups/big",
+        "powerups/shotgun",
+        "powerups/minigun",
+        "powerups/bomb",
+        "powerups/camo"
+    };
+    newSprite(sprite, IMAGE(powerupPallet[type]), R_POWERUPS, pos, VECTOR_0);
 
     anim_done = false;
     rot_nbr = Random::getRandomInRange(48, 56);

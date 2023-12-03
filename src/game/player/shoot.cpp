@@ -34,7 +34,9 @@ void Player::doShooting(Utils &utils, Projectiles &list)
     if (powerup == PowerupsList::CAMO) {
         if (camo_clock.getElapsedTime().asSeconds() >= 5.0f) {
             powerup = NO_POWERUP;
-            sprite.setColor(sf::Color::Red);
+            auto color = this->sprite.getColor();
+            color.a = 255;
+            this->sprite.setColor(color);
         }
     }
 }

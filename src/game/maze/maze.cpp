@@ -83,7 +83,7 @@ void Maze::generateNewMaze(int x, int y)
 
     while (!cells.hasSameIndex()) {
         generateNewRandom();
-        for (int index = 0; index < random.size(); index++) {
+        for (size_t index = 0; index < random.size(); index++) {
 
             int index_next = Random::getRandom(4);
             int index_cell = random[index];

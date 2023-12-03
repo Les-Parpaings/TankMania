@@ -1,77 +1,106 @@
 ##
-## MAZE PROJECT, 2022
+## EPITECH PROJECT, 2022
 ## Makefile
 ## File description:
 ## Makefile
 ##
 
-# Compilation Settings
-BIN		:=		TankMania
-CC		:=		g++ -g -std=c++17
-VALG	:=		valgrind --leak-check=full --log-file=report.txt
-SFML	:=		-lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window
+# Compilation
+CXX			:=		g++ -g
+FLAGS		:=		-std=c++17 -Wall -Wextra
+VALG		:=		valgrind --leak-check=full --log-file=report.txt
+SFML		:=		-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
 
-# Command Settings
-rwildcard	=		$(foreach d, $(wildcard $(1:=/*)), $(call rwildcard, $d, $2) $(filter $(subst *, %, $2), $d))
-RM			=		@rm --force
-FIND		=		@find -name "*.o" -exec printf
+# Binary
+BINDIR		:=		.
+BINNAME		:=		TankMania
+BIN			:=		$(BINDIR)/$(BINNAME)
 
-# File Settings
-DIR		:=		src
-EXT		:=		cpp
-SRC		:=		$(call rwildcard, $(DIR), *.$(EXT))
-OBJ		:=		$(SRC:.$(EXT)=.o)
+# Source
+SRCDIR		:=		src
+SRCEXT		:=		cpp
+SRC			:=		$(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 
-# Dependencies Settings
-LIB		:=		./lib/
-INCLUDE	:=		./include/
+# Objects
+OBJDIR		:=		obj
+OBJEXT		:=		o
+OBJ			:=		\
+$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRC:.$(SRCEXT)=.$(OBJEXT)))
 
-# Display Settings
-RED		:=	\033[1;31m
-GREEN	:=	\033[1;32m
-YELLOW	:=	\033[1;33m
-BLUE	:=	\033[1;34m
-CYAN	:=	\033[1;36m
-NC		:=	\033[0m
-TEXT	:=	$(GREEN)➜$(NC)  $(CYAN)Root$(NC)
-INTRO	:=	$(YELLOW)================================================================$(NC)\n
+# Test
+TESTDIR		:=		tests
+TESTEXT		:=		cpp
+TESTSRC		:=		$(shell find $(TESTDIR) -type f -name *.$(TESTEXT))
+TESTBIN		:=		unit_tests
+TESTLIB		:=		-lcriterion
 
-.PHONY: all clean fclean re compil valgrind
+# Library / Include
+LIB			:=		-L./lib/
+INC			:=		-I./include/
+
+# Command
+RM			:=		rm -rf
+
+# Display
+BLACK		:=		\033[1;30m
+RED			:=		\033[1;31m
+GREEN		:=		\033[1;32m
+YELLOW		:=		\033[1;33m
+BLUE		:=		\033[1;34m
+MAGENTA		:=		\033[1;35m
+CYAN		:=		\033[1;36m
+WHITE		:=		\033[1;37m
+NC			:=		\033[0m
+LINE		:=		\n================================================\n
+INTRO_SUCCES	:=		$(GREEN)➜$(NC)
+INTRO_FAILED	:=		$(RED)➜$(NC)
+
+.PHONY:		all	clean	fclean	re	tests_run
+.SILENT:	all	$(OBJ)	$(BIN)	clean	fclean	re	tests_run
 
 all:	$(BIN)
 
-#Compiled all .c file not compiled in .o
-$(OBJ):	%.o: %.$(EXT)
-		@$(CC) -I$(INCLUDE) -c -o $@ $<
-		@printf "$(TEXT)$(BLUE) file $(RED)./$@$(BLUE) created$(NC)\n"
+# Compiled all .c file not compiled in .o
+$(OBJ): $(OBJDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	mkdir -p $(dir $@)
+	$(CXX) $(FLAGS) $(SFML) $(INC) -c -o $@ $< \
+	&& printf "$(GREEN)➜  $(BLUE)file $(CYAN)$@ $(GREEN)created$(NC)\n" \
+	|| printf "$(RED)➜  $(BLUE)file $(CYAN)$@ $(RED)failed$(NC)\n"
 
-#Compiled project with lib and all .o files
+# Compiled project with lib and all .o files
 $(BIN):	$(OBJ)
-		@$(CC) -o $@ $^ -I$(INCLUDE) $(SFML)
-		@printf "\n$(INTRO)$(YELLOW) · Compilation Succesfully Finished$(NC)\n$(INTRO)\n"
+	$(CXX) $(FLAGS) $(SFML) $(INC) -o $@ $^ \
+	&& printf "$(YELLOW)$(LINE) · Compilation Done$(LINE)$(NC)\n" \
+	|| printf "$(RED)$(LINE) · Compilation Failed$(LINE)$(NC)\n"
 
-#Removes all .o files
+# Removes all .o files
 clean:
-#		$(call INTRO_DISPLAY, ${INTRO_CLEAN})
-		@$(FIND) "$(TEXT)$(BLUE) file $(RED){}$(BLUE) removed$(NC)\n" \;
-		@$(RM) $(OBJ)
+	find $(OBJDIR) -type f -name *.$(OBJEXT) \
+	-exec printf "$(GREEN)➜  $(BLUE)file $(CYAN){} $(BLUE)removed$(NC)\n" \;
+	$(RM) $(OBJDIR)/*
 
-#Removes all useless files, binary and library
+# Removes all useless files, binary and library
 fclean:	clean
-#		$(call INTRO_DISPLAY, ${INTRO_FCLEAN})
-		@find -name "prgm" -exec printf "$(TEXT)$(BLUE) binary $(RED)$(BIN)$(BLUE) removed$(NC)\n" \;
-		@$(RM) $(BIN)
-		@$(RM) report.txt
-		@find -name "vgcore.*" -delete
-		@find -name "report.txt.core.*" -delete
+	find $(BINDIR) -type f -name $(BINNAME) \
+	-exec printf "$(GREEN)➜  $(BLUE)binary $(CYAN){} $(BLUE)removed$(NC)\n" \;
+	$(RM) $(BIN)
+	find $(BINDIR) -type f -name $(TESTBIN) \
+	-exec printf "$(GREEN)➜  $(BLUE)binary $(CYAN){} $(BLUE)removed$(NC)\n" \;
+	$(RM) $(TESTBIN)
+	$(RM) *.gcda
+	$(RM) *.gcno
+	$(RM) vgcore.*
+	$(RM) report.txt
+	$(RM) report.txt.core.*
 
-#Clean all and compile the project
+# Clean all and compile the project
 re:	fclean all
 
-#Recompile and Start the project
-compil:	re
-	@./$(BIN)
+# Compile and run tests
+tests_run:	re
+	$(CXX) $(FLAGS) $(INC) -o $(TESTBIN) $(SRC) $(TESTSRC) $(LIB) $(TESTLIB)
+	./$(TESTBIN)
 
-#Start the project with valgrind in a report file
-valgrind:
-	@$(VALG) ./$(BIN)
+gcovr:		tests_run
+	gcovr --exclude tests/
+	gcovr --exclude tests/ --branches

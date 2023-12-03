@@ -7,12 +7,15 @@ namespace Tank
 
 void HUD::setAlive()
 {
-    name.setStyle(sf::Text::Style::Regular);
+    auto color = player.getColor();
+    color.a = 255;
+    player.setColor(color);
 }
 
 void HUD::setDead()
 {
-    name.setStyle(sf::Text::Style::StrikeThrough);
-}
+    auto color = player.getColor();
+    color.a = 64;
+    player.setColor(color);}
 
 }

@@ -70,7 +70,7 @@ void do_logic_powerup(Powerups &list, sf::Clock &clock, Maze &maze, Utils &utils
     }
 
     // Creation
-    if (clock.getElapsedTime().asSeconds() >= 10.0f) {
+    if (clock.getElapsedTime().asSeconds() >= 1.0f) {
         sf::Vector2f size = maze.getSize();
         list.push_back(Powerup(utils, sf::Vector2f(Random::getRandomInRange(1, (int)size.x) * 100.0f - 10.0f, Random::getRandomInRange(1, (int)size.y) * 100.0f - 10.0f)));
         clock.restart();

@@ -28,11 +28,15 @@ bool Player::touchedPowerup(Powerup &powerup)
 {
     if (isColliding(powerup.getSprite(), sprite)) {
         this->powerup = powerup.getType();
+        this->hud.setPowerup(powerup.getSprite().getTexture());
+
         if (this->powerup == PowerupsList::MINIGUN)
             this->minigun_clock.restart();
         if (this->powerup == PowerupsList::CAMO) {
             this->camo_clock.restart();
-            this->sprite.setColor(sf::Color(255, 0, 0, 64));
+            auto color = this->sprite.getColor();
+            color.a = 64;
+            this->sprite.setColor(color);
         }
         return true;
     } else {
